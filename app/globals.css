@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --orange: #FF6B00;
+  --white: #FFFFFF;
+  --black: #000000;
+  --mouse-x: 0.5;
+  --mouse-y: 0.5;
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 24 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 24 100% 50%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 24 100% 50%;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px var(--orange), 0 0 20px var(--orange), 0 0 30px var(--orange);
+  }
+  to {
+    text-shadow: 0 0 20px var(--orange), 0 0 30px var(--orange), 0 0 40px var(--orange);
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, var(--orange), var(--white));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255, 107, 0, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 107, 0, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(255, 107, 0, 0.1) 0%, transparent 50%);
+  background-size: 40px 40px, 40px 40px, 100% 100%;
+  background-position: center center;
+  animation: patternFloat 20s linear infinite;
+}
+
+.bg-grid-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), 
+              rgba(255, 107, 0, 0.2), 
+              transparent 40%);
+  opacity: 0.8;
+  mix-blend-mode: overlay;
+}
+
+@keyframes patternFloat {
+  0% {
+    background-position: 0 0, 0 0, center center;
+  }
+  100% {
+    background-position: 40px 40px, 40px 40px, center center;
+  }
+}
+
+.feature-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .gradient-text {
+    font-size: 2.5rem;
+  }
+  
+  .bg-grid-pattern {
+    background-size: 20px 20px, 20px 20px, 100% 100%;
+  }
+}
